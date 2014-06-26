@@ -1,0 +1,12 @@
+Universe = vanilla
+
+Executable = SDE-2.py
+Arguments = 0.25 500000
+
+Error = log/anywhere.err.$(Cluster)-$(Process)
+Output = log/anywhere.out.$(Cluster)-$(Process)
+Log = log/anywhere.log.$(Cluster)
+
++ProjectName="ConnectTrain"
+
+Queue 100 
