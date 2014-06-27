@@ -7,7 +7,7 @@ Error = log/ec2.err.$(Cluster)-$(Process)
 Output = log/ec2.out.$(Cluster)-$(Process)
 Log = log/ec2.log.$(Cluster)
 
-Requirements = (IS_EC2 =?= True)
+#Requirements = (IS_EC2 =?= True)
 
 +ProjectName="ConnectTrain"
 
