@@ -9,6 +9,4 @@ Log = log/osg.log.$(Cluster)
 
 Requirements = (HAS_NUMPY =?= TRUE)
 
-+ProjectName="ConnectTrain"
-
 Queue 25

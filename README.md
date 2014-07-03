@@ -13,13 +13,9 @@ First let's create a new space for this tutorial. You can also run tutorial scal
 $ mkdir -p osg-scaling
 $ cd osg-scaling
 ```
-Steering jobs to EC2
---------------------
-Suppose you want to send jobs to Amazon's Elastic Compute Cloud (EC2). For this workshop, we've provisioned about 1000 CPUs on the cloud – but how do we steer jobs there?
-
-One way to do this is by adding a "Requirements" section to our HTCondor job. Requirements match against an HTCondor ClassAd (classified ad), which is describes the capabilities of an execute node.
-
-Note: You can read more about ClassAds here: http://research.cs.wisc.edu/htcondor/manual/v8.1/4_1HTCondor_s_ClassAd.html
+Steering jobs to a Campus Grid
+------------------------------
+If you have a Campus Grid connected into OSG Connect, you can, for example, steer jobs by matching against hostname. In this example, we match against any hostname that starts with "uc" in the University of Chicago Campus Grid. 
 
 First thing's first, we need to create a job. Let's re-use the "short.sh" script from the Quickstart tutorial. The short.sh script should look like the following:
 ```bash
@@ -34,26 +30,8 @@ echo "Working hard..."
 sleep ${1-15}
 echo "Science complete!"
 ```
-For our EC2 job, we want to match against a machine that describes itself as an EC2 host with the attribute "IS_EC2". Let's name the file ec2.submit. Here's what the job should look like:
-```
-Universe = vanilla
 
-Executable = short.sh
-Arguments = 5 # to sleep 5 seconds
-
-Error = log/ec2.err.$(Cluster)-$(Process)
-Output = log/ec2.out.$(Cluster)-$(Process)
-Log = log/ec2.log.$(Cluster)
-
-Requirements = (IS_EC2 =?= True)
-
-+ProjectName="ConnectTrain"
-
-Queue 25
-```
-Steering jobs to a Campus Grid
-------------------------------
-If you have a Campus Grid connected into OSG Connect, you can, for example, steer jobs by matching against hostname. In this example, we match against any hostname that starts with "uc" in the University of Chicago Campus Grid. We'll call the file campus.submit: 
+To steer our job to the University of Chicago Campus Grid, we'll add a "Requirements" section. Requirements match against an HTCondor ClassAd (classified ad), which describes the capabilities of an execute node. We'll call the job submission file campus.submit: 
 ```
 Universe = vanilla
 
@@ -65,9 +43,9 @@ Output = log/campus.out.$(Cluster)-$(Process)
 Log = log/campus.log.$(Cluster)
 
 Requirements = (regexp("^uc*", TARGET.Machine, "IM") == True)
-+ProjectName="ConnectTrain"
 Queue 25
 ```
+
 Steering jobs to OSG
 --------------------
 In some cases, you might want to restrict your job to only run at certain OSG sites. For this example, we'll change it up a bit by using some Python code that requires NumPy. Let's first create the Python code in our file SDE.py:
@@ -131,8 +109,6 @@ Log = log/osg.log.$(Cluster)
 
 Requirements = (HAS_NUMPY =?= TRUE)
 
-+ProjectName="ConnectTrain"
-
 Queue 25
 ```
 Submitting anywhere.
@@ -194,6 +170,5 @@ Arguments = 0.25 500000
 Error = log/anywhere.err.$(Cluster)-$(Process)
 Output = log/anywhere.out.$(Cluster)-$(Process)
 Log = log/anywhere.log.$(Cluster)
-+ProjectName="ConnectTrain"
 Queue 100
 ```

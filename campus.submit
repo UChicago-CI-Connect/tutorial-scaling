@@ -9,6 +9,4 @@ Log = log/campus.log.$(Cluster)
 
 Requirements = (regexp("^uc*", TARGET.Machine, "IM") == True)
 
-+ProjectName="ConnectTrain"
-
 Queue 25
