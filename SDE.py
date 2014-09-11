@@ -5,7 +5,7 @@
 
 from math import sqrt     # import sqrt function
 from sys import argv      # command line arguments
-from numpy import random  # random number library
+import random  # random number library
 from os import urandom    # used to seed the random number generator (RNG)
 from time import clock    # time the run
 start = clock()           # start timing
@@ -26,7 +26,7 @@ xold=xstart;              # initialize the starting point
 def F(x): return 4*x*(1-x*x)
 for i in range(Numt):
     # Perform the next step. Uses a gaussian random number at each step.
-    xnew=xold+dt*F(xold)+pref*random.normal(0,1);
+    xnew=xold+dt*F(xold)+pref*random.gauss(0,1);
     # Test to see if a transition has occured
     # Assumes: abs(xnew-xold) < 1
     if abs(xnew) > 1.0 and basin * xnew < 0.0 :
