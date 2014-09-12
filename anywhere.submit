@@ -1,6 +1,6 @@
 Universe = vanilla
 
-Executable = SDE-2.py
+Executable = SDE.py
 Arguments = 0.25 500000
 
 Error = log/anywhere.err.$(Cluster)-$(Process)
