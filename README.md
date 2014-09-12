@@ -17,7 +17,7 @@ Steering jobs to a Campus Grid
 ------------------------------
 If you have a Campus Grid connected into OSG Connect, you can, for example, steer jobs by matching against hostname. In this example, we match against any hostname that starts with "uc" in the University of Chicago Campus Grid. 
 
-First thing's first, we need to create a job. Let's re-use the "short.sh" script from the Quickstart tutorial. The short.sh script should look like the following:
+First things first, we need to create a job. Let's re-use the "short.sh" script from the Quickstart tutorial. The short.sh script should look like the following:
 ```bash
 #!/bin/bash
 # short.sh: a short discovery job
