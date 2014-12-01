@@ -1,12 +1,20 @@
-Universe = vanilla
+Universe = grid
+grid_resource = batch condor dbala@login.ci-connect.uchicago.edu
 
-Executable = short.sh
-Arguments = 5 # to sleep 5 seconds
+Executable = SDE.py
+Arguments = 0.25 500000
+transfer_input_files = SDE.py
 
-Error = log/campus.err.$(Cluster)-$(Process)
-Output = log/campus.out.$(Cluster)-$(Process)
-Log = log/campus.log.$(Cluster)
+Error = campus.err.$(Cluster)-$(Process)
+Output =campus.out.$(Cluster)-$(Process)
+Log = campus.log.$(Cluster)
 
 Requirements = (regexp("^uc*", TARGET.Machine, "IM") == True)
++ProjectName="ConnectTrain"
 
-Queue 25
+Queue 1
+
+
+
+
+

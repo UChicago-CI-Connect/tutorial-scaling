@@ -1,10 +1,19 @@
-Universe = vanilla
+Universe = grid
+grid_resource = batch condor dbala@login.ci-connect.uchicago.edu
 
 Executable = SDE.py
 Arguments = 0.25 500000
+transfer_input_files = SDE.py
 
-Error = log/anywhere.err.$(Cluster)-$(Process)
-Output = log/anywhere.out.$(Cluster)-$(Process)
-Log = log/anywhere.log.$(Cluster)
+Error = anywhere.err.$(Cluster)-$(Process)
+Output = anywhere.out.$(Cluster)-$(Process)
+Log = anywhere.log.$(Cluster)
 
-Queue 100 
++ProjectName="ConnectTrain"
+
+Queue 1
+
+
+
+
+
